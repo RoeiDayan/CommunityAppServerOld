@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
 namespace CommunityAppServer.DTO
@@ -25,15 +25,38 @@ namespace CommunityAppServer.DTO
         [Column(TypeName = "datetime")]
         public DateTime? CreatedAt { get; set; }
 
-        [InverseProperty("Notice")]
-        public virtual ICollection<NoticeFile> NoticeFiles { get; set; } = new List<NoticeFile>();
+        //[InverseProperty("Notice")]
+        //public virtual ICollection<NoticeFile> NoticeFiles { get; set; } = new List<NoticeFile>();
 
-        [ForeignKey("UserId")]
-        [InverseProperty("Notices")]
-        public virtual Account? User { get; set; }
+        //[ForeignKey("UserId")]
+        //[InverseProperty("Notices")]
+        //public virtual Account? User { get; set; }
 
-        [ForeignKey("NoticeId")]
-        [InverseProperty("Notices")]
-        public virtual ICollection<Community> Coms { get; set; } = new List<Community>();
+        //[ForeignKey("NoticeId")]
+        //[InverseProperty("Notices")]
+        //public virtual ICollection<Community> Coms { get; set; } = new List<Community>();
+
+        public Models.Notice GetNotice()
+        {
+            Models.Notice ntc = new Models.Notice();
+            ntc.NoticeId = NoticeId;
+            ntc.UserId = UserId;
+            ntc.Title = Title;
+            ntc.Text = Text;
+            ntc.StartTime = StartTime;
+            ntc.EndTime = EndTime;
+            ntc.CreatedAt = CreatedAt;
+            return ntc;
+        }
+        public Notice(Models.Notice ntc)
+        {
+            this.NoticeId = ntc.NoticeId;
+            this.UserId = ntc.UserId;
+            this.Title = ntc.Title;
+            this.Text = ntc.Text;
+            this.StartTime = ntc.StartTime;
+            this.EndTime = ntc.EndTime;
+            this.CreatedAt = ntc.CreatedAt;
+        }
     }
 }
