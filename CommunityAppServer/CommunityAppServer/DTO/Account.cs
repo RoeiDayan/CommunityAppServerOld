@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
 namespace CommunityAppServer.DTO
@@ -21,33 +21,25 @@ namespace CommunityAppServer.DTO
         [Column(TypeName = "datetime")]
         public DateTime? CreatedAt { get; set; }
 
-        [InverseProperty("User")]
-        public virtual ICollection<Member> Members { get; set; } = new List<Member>();
-
-        [InverseProperty("User")]
-        public virtual ICollection<Notice> Notices { get; set; } = new List<Notice>();
-
-        [InverseProperty("User")]
-        public virtual ICollection<Payment> Payments { get; set; } = new List<Payment>();
-
-        [InverseProperty("User")]
-        public virtual ICollection<Report> Reports { get; set; } = new List<Report>();
-
-        [InverseProperty("User")]
-        public virtual ICollection<RoomRequest> RoomRequests { get; set; } = new List<RoomRequest>();
-
-        [InverseProperty("KeyHolder")]
-        public virtual ICollection<TenantRoom> TenantRooms { get; set; } = new List<TenantRoom>();
-
+        
 
         public Models.Account GetAccount()
         {
             Models.Account acc = new Models.Account();
+            acc.Id = Id;
             acc.Email = this.Email;
+            acc.Name  = this.Name;
+            acc.Password = this.Password;
+            acc.CreatedAt = this.CreatedAt;
+            return acc;
         }
         public Account(Models.Account acc)
         {
+            this.Id = acc.Id;
             this.Email = acc.Email;
+            this.Name = acc.Name;
+            this.Password = acc.Password;
+            this.CreatedAt = acc.CreatedAt;
         }
     }
 }
