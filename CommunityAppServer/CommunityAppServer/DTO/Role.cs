@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+using CommunityAppServer.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace CommunityAppServer.DTO
 {
@@ -9,5 +10,18 @@ namespace CommunityAppServer.DTO
 
         [StringLength(10)]
         public string? RoleName { get; set; }
+
+        public Models.Role GetRole()
+        {
+            Models.Role role = new Models.Role();
+            role.RoleNum = RoleNum;
+            role.RoleName = RoleName;
+            return role;
+        }
+        public Role(Models.Role role)
+        {
+            this.RoleNum = role.RoleNum;
+            this.RoleName = role.RoleName;
+        }
     }
 }
