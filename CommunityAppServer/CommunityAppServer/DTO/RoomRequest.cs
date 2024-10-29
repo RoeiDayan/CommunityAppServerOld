@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
 namespace CommunityAppServer.DTO
@@ -26,12 +26,37 @@ namespace CommunityAppServer.DTO
         [Column(TypeName = "datetime")]
         public DateTime? CreatedAt { get; set; }
 
-        [ForeignKey("ComId")]
-        [InverseProperty("RoomRequests")]
-        public virtual Community? Com { get; set; }
+        //[ForeignKey("ComId")]
+        //[InverseProperty("RoomRequests")]
+        //public virtual Community? Com { get; set; }
 
-        [ForeignKey("UserId")]
-        [InverseProperty("RoomRequests")]
-        public virtual Account? User { get; set; }
+        //[ForeignKey("UserId")]
+        //[InverseProperty("RoomRequests")]
+        //public virtual Account? User { get; set; }
+
+        public Models.RoomRequest GetRoomRequest()
+        {
+            Models.RoomRequest room = new Models.RoomRequest();
+            room.RequestId = RequestId;
+            room.UserId = UserId;
+            room.ComId = ComId;
+            room.StartTime = StartTime;
+            room.EndTime = EndTime;
+            room.Text = Text;
+            room.IsApproved = IsApproved;
+            room.CreatedAt = CreatedAt;
+            return room;
+        }
+        public RoomRequest(Models.RoomRequest role)
+        {
+            this.RequestId = role.RequestId;
+            this.UserId = role.UserId;
+            this.ComId = role.ComId;
+            this.StartTime = role.StartTime;
+            this.EndTime = role.EndTime;
+            this.Text = role.Text;
+            this.IsApproved = role.IsApproved;
+            this.CreatedAt = role.CreatedAt;
+        }
     }
 }
